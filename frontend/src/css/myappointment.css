@@ -1,0 +1,124 @@
+.my-appointments-page {
+  min-height: 100vh;
+  padding: 30px;
+  background: #f4f7fb;
+}
+
+.my-appointments-page h1 {
+  margin-bottom: 25px;
+}
+
+.appointment-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+  gap: 22px;
+}
+
+.appointment-card {
+  background: white;
+  padding: 22px;
+  border-radius: 18px;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+  border-top: 5px solid #2563eb;
+}
+
+.appointment-card h3 {
+  margin-top: 0;
+  color: #111827;
+}
+
+.appointment-card p {
+  margin: 9px 0;
+}
+
+.status {
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+.status.booked {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.status.pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.status.accepted {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.status.rejected {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.status.completed {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.chat-btn,
+.receipt-btn {
+  width: 100%;
+  border: none;
+  margin-top: 14px;
+  padding: 12px;
+  border-radius: 10px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.chat-btn {
+  background: #2563eb;
+}
+
+.receipt-btn {
+  background: #16a34a;
+}
+
+.empty-box {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  text-align: center;
+}
+.completed-btn {
+  width: 100%;
+  margin-top: 14px;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: #9ca3af;
+  color: white;
+  font-weight: bold;
+  cursor: not-allowed;
+}
+.disabled-chat-btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 12px;
+  border: none;
+  border-radius: 10px;
+  background: #f59e0b;
+  color: white;
+  font-weight: bold;
+  cursor: not-allowed;
+}
+
+.completed-btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 12px;
+  border: none;
+  border-radius: 10px;
+  background: #9ca3af;
+  color: white;
+  font-weight: bold;
+  cursor: not-allowed;
+}

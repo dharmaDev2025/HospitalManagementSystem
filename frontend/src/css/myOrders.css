@@ -1,0 +1,373 @@
+.my-orders-page {
+  min-height: 100vh;
+  padding: 35px 6%;
+  background: linear-gradient(
+    135deg,
+    #eef5ff,
+    #f8fbff
+  );
+}
+
+/* HEADER */
+
+.my-orders-header {
+  background: linear-gradient(
+    135deg,
+    #0d6efd,
+    #4ea5ff
+  );
+
+  color: white;
+
+  padding: 30px;
+
+  border-radius: 22px;
+
+  margin-bottom: 30px;
+
+  box-shadow:
+    0 10px 25px
+    rgba(13,110,253,0.25);
+}
+
+.my-orders-header h1 {
+  font-size: 36px;
+  margin-bottom: 8px;
+}
+
+.my-orders-header p {
+  font-size: 16px;
+  opacity: 0.95;
+}
+
+/* ORDER LIST */
+
+.my-orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ORDER CARD */
+
+.my-order-card {
+  background: white;
+
+  border-radius: 22px;
+
+  padding: 25px;
+
+  box-shadow:
+    0 8px 25px
+    rgba(0,0,0,0.07);
+
+  transition: 0.3s;
+}
+
+.my-order-card:hover {
+  transform: translateY(-5px);
+}
+
+/* TOP */
+
+.order-top {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 20px;
+
+  border-bottom: 1px solid #e5e7eb;
+
+  padding-bottom: 18px;
+
+  margin-bottom: 18px;
+}
+
+.order-top h3 {
+  font-size: 22px;
+  color: #111827;
+  margin-bottom: 5px;
+}
+
+.order-top p {
+  color: #64748b;
+  font-size: 14px;
+}
+
+.order-status {
+  background: linear-gradient(
+    135deg,
+    #e0f2fe,
+    #bae6fd
+  );
+
+  color: #0369a1;
+
+  padding: 9px 18px;
+
+  border-radius: 30px;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  text-transform: capitalize;
+}
+
+/* MEDICINES */
+
+.order-medicines {
+  background: #f8fafc;
+
+  border-left: 5px solid #0d6efd;
+
+  border-radius: 16px;
+
+  padding: 15px;
+
+  margin-bottom: 22px;
+}
+
+.order-med {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  padding: 12px 0;
+
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.order-med:last-child {
+  border-bottom: none;
+}
+
+.order-med span:first-child {
+  color: #111827;
+  font-weight: 600;
+}
+
+.order-med span:last-child {
+  background: #dcfce7;
+
+  color: #15803d;
+
+  padding: 5px 12px;
+
+  border-radius: 20px;
+
+  font-size: 13px;
+
+  font-weight: 600;
+}
+
+/* TRACKING */
+
+.tracking-steps {
+  display: flex;
+
+  justify-content: space-between;
+
+  position: relative;
+
+  margin: 28px 5px 30px;
+}
+
+.tracking-steps::before {
+  content: "";
+
+  position: absolute;
+
+  top: 17px;
+
+  left: 0;
+
+  right: 0;
+
+  height: 4px;
+
+  background: #e5e7eb;
+
+  border-radius: 10px;
+
+  z-index: 0;
+}
+
+.tracking-steps div {
+  position: relative;
+
+  z-index: 1;
+
+  width: 25%;
+
+  text-align: center;
+
+  color: #64748b;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  padding-top: 42px;
+}
+
+.tracking-steps div::before {
+  content: "";
+
+  position: absolute;
+
+  top: 6px;
+
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  width: 26px;
+
+  height: 26px;
+
+  background: #ffffff;
+
+  border: 4px solid #cbd5e1;
+
+  border-radius: 50%;
+}
+
+.active-step {
+  color: #16a34a !important;
+}
+
+.active-step::before {
+  background: #16a34a !important;
+
+  border-color: #16a34a !important;
+
+  box-shadow:
+    0 0 0 5px
+    #dcfce7;
+}
+
+/* DETAILS */
+
+.order-bottom {
+  display: grid;
+
+  grid-template-columns:
+    1.5fr 1fr 1fr;
+
+  gap: 14px;
+}
+
+.order-bottom p {
+  background: linear-gradient(
+    135deg,
+    #f8fafc,
+    #eef6ff
+  );
+
+  padding: 14px;
+
+  border-radius: 14px;
+
+  border: 1px solid #e2e8f0;
+
+  color: #475569;
+
+  font-size: 14px;
+}
+
+.order-bottom strong {
+  color: #111827;
+}
+
+/* EMPTY */
+
+.no-orders {
+  background: white;
+
+  border-radius: 22px;
+
+  padding: 50px;
+
+  text-align: center;
+
+  color: #64748b;
+
+  font-size: 18px;
+
+  box-shadow:
+    0 8px 25px
+    rgba(0,0,0,0.07);
+}
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+
+  .my-orders-page {
+    padding: 20px;
+  }
+
+  .my-orders-header {
+    padding: 24px;
+  }
+
+  .my-orders-header h1 {
+    font-size: 28px;
+  }
+
+  .order-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .tracking-steps {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .tracking-steps::before {
+    display: none;
+  }
+
+  .tracking-steps div {
+    width: 100%;
+
+    text-align: left;
+
+    background: #f8fafc;
+
+    padding: 12px 12px 12px 45px;
+
+    border-radius: 12px;
+  }
+
+  .tracking-steps div::before {
+    left: 18px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    width: 18px;
+
+    height: 18px;
+
+    border-width: 3px;
+  }
+
+  .order-bottom {
+    grid-template-columns: 1fr;
+  }
+
+  .order-med {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}

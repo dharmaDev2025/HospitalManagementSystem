@@ -1,0 +1,349 @@
+.ambulance-page {
+  min-height: 100vh;
+  padding: 30px 5%;
+  background: #f4f7fc;
+}
+
+/* HEADER */
+
+.ambulance-header {
+  background: linear-gradient(135deg, #dc2626, #ef4444);
+  color: white;
+  padding: 30px;
+  border-radius: 24px;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 10px 30px rgba(220, 38, 38, 0.25);
+}
+
+.ambulance-header h1 {
+  font-size: 38px;
+  margin-bottom: 8px;
+}
+
+.ambulance-header p {
+  font-size: 15px;
+  opacity: 0.95;
+}
+
+.ambulance-icon {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: white;
+  color: #dc2626;
+  font-size: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* AMBULANCE LIST */
+
+.ambulance-list {
+  background: white;
+  padding: 25px;
+  border-radius: 20px;
+  margin-bottom: 35px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+}
+
+.ambulance-list h2,
+.my-ambulance-section h2 {
+  color: #111827;
+  margin-bottom: 20px;
+}
+
+.ambulance-card {
+  background: #f8fafc;
+  border-left: 6px solid #22c55e;
+  padding: 18px;
+  border-radius: 16px;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ambulance-card.busy {
+  border-left-color: #ef4444;
+  opacity: 0.8;
+}
+
+.ambulance-card h3 {
+  color: #111827;
+  margin-bottom: 6px;
+}
+
+.ambulance-card p {
+  color: #64748b;
+  margin: 4px 0;
+}
+
+.hidden-phone {
+  color: #94a3b8;
+  font-size: 13px;
+}
+
+.ambulance-card-right {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-end;
+}
+
+.ambulance-card span {
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.ambulance-card:not(.busy) span {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.ambulance-card.busy span {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.book-btn {
+  border: none;
+  background: linear-gradient(135deg, #16a34a, #22c55e);
+  color: white;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.book-btn:hover {
+  transform: translateY(-2px);
+}
+
+/* MY BOOKINGS */
+
+.my-ambulance-section {
+  background: white;
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+}
+
+.my-booking-card {
+  background: #f8fafc;
+  padding: 20px;
+  border-radius: 18px;
+  margin-bottom: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-left: 6px solid #f59e0b;
+}
+
+.my-booking-card h3 {
+  color: #111827;
+  margin-bottom: 8px;
+}
+
+.my-booking-card p {
+  color: #64748b;
+  margin-bottom: 5px;
+}
+
+.booking-status {
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.booking-status.requested {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.booking-status.assigned {
+  background: #dbeafe;
+  color: #2563eb;
+}
+
+.booking-status.completed {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+/* DRIVER CONTACT */
+
+.driver-contact {
+  margin-top: 12px;
+}
+
+.call-btn {
+  display: inline-block;
+  text-decoration: none;
+  background: #16a34a;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 10px;
+  margin-right: 10px;
+  margin-top: 10px;
+  font-weight: 700;
+}
+
+.copy-btn {
+  border: none;
+  background: #2563eb;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.pickup-btn {
+  margin-top: 12px;
+  border: none;
+  background: linear-gradient(135deg, #0d6efd, #3b82f6);
+  color: white;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* BOOKING MODAL */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.booking-modal {
+  width: 430px;
+  background: white;
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.25);
+}
+
+.booking-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.booking-modal-header h2 {
+  color: #111827;
+}
+
+.booking-modal-header button {
+  border: none;
+  background: #fee2e2;
+  color: #dc2626;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.booking-modal form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.booking-modal textarea {
+  min-height: 100px;
+  padding: 14px;
+  border: 1px solid #dbe2ea;
+  border-radius: 13px;
+  resize: none;
+  outline: none;
+  background: #fafafa;
+}
+
+.booking-modal textarea:focus {
+  border-color: #dc2626;
+  background: white;
+}
+
+.booking-modal form button {
+  border: none;
+  background: linear-gradient(135deg, #dc2626, #ef4444);
+  color: white;
+  padding: 14px;
+  border-radius: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* EMPTY */
+
+.empty-ambulance {
+  background: #f8fafc;
+  padding: 35px;
+  border-radius: 15px;
+  text-align: center;
+  color: #64748b;
+}
+
+/* MOBILE */
+
+@media (max-width: 900px) {
+  .ambulance-card,
+  .my-booking-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .ambulance-card-right {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 768px) {
+  .ambulance-page {
+    padding: 20px;
+  }
+
+  .ambulance-header {
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .ambulance-header h1 {
+    font-size: 28px;
+  }
+
+  .ambulance-icon {
+    width: 70px;
+    height: 70px;
+    font-size: 36px;
+  }
+
+  .booking-modal {
+    width: 92%;
+  }
+
+  .call-btn,
+  .copy-btn {
+    margin-bottom: 8px;
+  }
+}

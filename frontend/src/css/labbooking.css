@@ -1,0 +1,120 @@
+.lab-page {
+  min-height: 100vh;
+  padding: 25px;
+  background: #f4f7fb;
+}
+
+.lab-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(135deg,#2563eb,#06b6d4);
+  color: white;
+  padding: 25px;
+  border-radius: 18px;
+  margin-bottom: 25px;
+}
+
+.lab-icon {
+  font-size: 55px;
+}
+
+.lab-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.lab-box {
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,.08);
+}
+
+.lab-box h2 {
+  margin-bottom: 15px;
+}
+
+.lab-box form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.lab-box input {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+.lab-box button {
+  border: none;
+  background: #2563eb;
+  color: white;
+  padding: 12px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.test-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.test-option {
+  background: #f8fafc;
+  padding: 12px;
+  border-radius: 10px;
+}
+
+.lab-section {
+  margin-top: 30px;
+}
+
+.booking-card {
+  background: white;
+  padding: 18px;
+  border-radius: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,.08);
+}
+
+.lab-status {
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.lab-status.pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.lab-status.processing {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.lab-status.completed {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.download-link {
+  display: inline-block;
+  padding: 8px 12px;
+  background: #10b981;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+.empty-box {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  text-align: center;
+}

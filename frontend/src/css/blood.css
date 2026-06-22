@@ -1,0 +1,269 @@
+.blood-page {
+  min-height: 100vh;
+  background: #f5f7fb;
+  padding: 30px;
+}
+
+/* HEADER */
+
+.blood-header {
+  background: linear-gradient(
+    135deg,
+    #dc2626,
+    #ef4444
+  );
+  color: white;
+  padding: 30px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  box-shadow: 0 8px 25px rgba(220,38,38,.25);
+}
+
+.blood-header h1 {
+  font-size: 34px;
+  margin-bottom: 8px;
+}
+
+.blood-header p {
+  font-size: 15px;
+  opacity: .95;
+}
+
+.blood-icon {
+  font-size: 60px;
+}
+
+/* LAYOUT */
+
+.blood-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 25px;
+  margin-bottom: 30px;
+}
+
+/* STOCK */
+
+.blood-stock-box,
+.blood-request-box,
+.my-blood-section {
+  background: white;
+  border-radius: 18px;
+  padding: 25px;
+  box-shadow: 0 5px 18px rgba(0,0,0,.06);
+}
+
+.blood-stock-box h2,
+.blood-request-box h2,
+.my-blood-section h2 {
+  color: #111827;
+  margin-bottom: 20px;
+}
+
+.blood-stock-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(170px,1fr));
+  gap: 18px;
+}
+
+.blood-card {
+  background: #fff5f5;
+  border: 2px solid #fecaca;
+  border-radius: 16px;
+  padding: 18px;
+  text-align: center;
+  transition: .3s;
+}
+
+.blood-card:hover {
+  transform: translateY(-4px);
+}
+
+.blood-card h3 {
+  color: #dc2626;
+  font-size: 26px;
+  margin-bottom: 8px;
+}
+
+.blood-card p {
+  font-weight: 600;
+  color: #374151;
+}
+
+.blood-card span {
+  display: inline-block;
+  margin-top: 10px;
+  background: #dcfce7;
+  color: #15803d;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* REQUEST FORM */
+
+.blood-request-box form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.blood-request-box select,
+.blood-request-box input {
+  padding: 13px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  outline: none;
+}
+
+.blood-request-box select:focus,
+.blood-request-box input:focus {
+  border-color: #dc2626;
+}
+
+.blood-request-box button {
+  background: linear-gradient(
+    135deg,
+    #dc2626,
+    #ef4444
+  );
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.blood-request-box button:hover {
+  opacity: .9;
+}
+
+/* REQUEST HISTORY */
+
+.my-blood-section {
+  margin-top: 25px;
+}
+
+.blood-request-card {
+  background: #f8fafc;
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-left: 5px solid #dc2626;
+}
+
+.blood-request-card h3 {
+  color: #dc2626;
+  margin-bottom: 8px;
+}
+
+.blood-request-card p {
+  color: #475569;
+  margin-bottom: 5px;
+}
+
+.blood-request-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+/* STATUS */
+
+.blood-status {
+  padding: 8px 15px;
+  border-radius: 25px;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.blood-status.pending {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.blood-status.approved {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.blood-status.rejected {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+/* DELETE BUTTON */
+
+.delete-history-btn {
+  border: none;
+  background: #dc2626;
+  color: white;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.delete-history-btn:hover {
+  background: #b91c1c;
+}
+
+/* EMPTY */
+
+.empty-blood {
+  text-align: center;
+  padding: 40px;
+  color: #64748b;
+  background: #f8fafc;
+  border-radius: 12px;
+}
+
+/* MOBILE */
+
+@media(max-width:900px) {
+
+  .blood-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .blood-request-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .blood-request-right {
+    align-items: flex-start;
+  }
+}
+
+@media(max-width:600px) {
+
+  .blood-page {
+    padding: 15px;
+  }
+
+  .blood-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+  }
+
+  .blood-header h1 {
+    font-size: 28px;
+  }
+
+  .blood-stock-grid {
+    grid-template-columns: repeat(2,1fr);
+  }
+}

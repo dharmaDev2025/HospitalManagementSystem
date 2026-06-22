@@ -1,0 +1,211 @@
+.book-page {
+  min-height: 100vh;
+  padding: 24px;
+  background: #f4f7fb;
+}
+
+.book-header {
+  background: linear-gradient(135deg, #2563eb, #06b6d4);
+  color: white;
+  padding: 26px;
+  border-radius: 18px;
+  margin-bottom: 22px;
+}
+
+.book-header h1 {
+  margin: 0;
+  font-size: 32px;
+}
+
+.search-filter-box {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.search-filter-box input,
+.search-filter-box select {
+  padding: 13px;
+  border-radius: 12px;
+  border: 1px solid #d1d5db;
+}
+
+.search-filter-box input {
+  flex: 1;
+}
+
+.doctor-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+  gap: 20px;
+}
+
+.doctor-card {
+  background: white;
+  padding: 18px;
+  border-radius: 18px;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+}
+
+.doctor-top {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.doctor-top img {
+  width: 95px;
+  height: 95px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #dbeafe;
+  background: #f8fafc;
+}
+
+.doctor-card h3 {
+  margin: 0;
+  font-size: 21px;
+  color: #111827;
+}
+
+.specialization {
+  color: #2563eb;
+  font-weight: 700;
+  margin: 5px 0;
+}
+
+.doctor-card p {
+  margin: 5px 0;
+  color: #374151;
+}
+
+.treatment-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.type-btn {
+  flex: 1;
+  border: none;
+  padding: 11px;
+  border-radius: 10px;
+  background: #e5e7eb;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.active-online {
+  background: #2563eb;
+  color: white;
+}
+
+.active-offline {
+  background: #16a34a;
+  color: white;
+}
+
+.day-buttons {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.day-btn {
+  border: 1px solid #d1d5db;
+  background: #f9fafb;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: left;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.day-btn span {
+  display: block;
+  font-size: 12px;
+  color: #6b7280;
+  margin-top: 3px;
+}
+
+.active-day {
+  background: #ede9fe;
+  border-color: #7c3aed;
+  color: #5b21b6;
+}
+
+.slot-box {
+  margin-top: 14px;
+  background: #f8fafc;
+  padding: 13px;
+  border-radius: 14px;
+}
+
+.slot-box h4 {
+  margin: 0 0 10px;
+}
+
+.slot-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.slot-btn {
+  border: 1px solid #d1d5db;
+  background: white;
+  padding: 8px 10px;
+  border-radius: 9px;
+  font-weight: 700;
+  cursor: pointer;
+  min-width: 82px;
+}
+
+.slot-btn small {
+  display: block;
+  font-size: 10px;
+  margin-top: 3px;
+  color: #16a34a;
+}
+
+.slot-btn.selected {
+  background: #2563eb;
+  color: white;
+}
+
+.slot-btn.selected small {
+  color: white;
+}
+
+.slot-btn.booked {
+  background: #fee2e2;
+  color: #991b1b;
+  cursor: not-allowed;
+}
+
+.slot-btn.booked small {
+  color: #991b1b;
+}
+
+.book-btn {
+  margin-top: 16px;
+  width: 100%;
+  border: none;
+  padding: 13px;
+  border-radius: 12px;
+  background: #16a34a;
+  color: white;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .search-filter-box {
+    flex-direction: column;
+  }
+
+  .doctor-grid {
+    grid-template-columns: 1fr;
+  }
+}

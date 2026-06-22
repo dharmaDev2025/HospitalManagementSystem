@@ -1,0 +1,242 @@
+.featured-doctors{
+
+  padding: 90px 7%;
+
+  background: #f8fbff;
+
+}
+
+
+
+/* ================= TITLE ================= */
+
+.section-title{
+
+  text-align: center;
+
+  margin-bottom: 60px;
+
+}
+
+
+
+.section-title h1{
+
+  font-size: 42px;
+
+  color: #222;
+
+  margin-bottom: 15px;
+
+}
+
+
+
+.section-title p{
+
+  color: #666;
+
+  font-size: 17px;
+
+}
+
+
+
+/* ================= GRID ================= */
+
+.doctor-grid{
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fit,
+    minmax(260px,1fr));
+
+  gap: 30px;
+
+}
+
+
+
+/* ================= CARD ================= */
+
+.doctor-card{
+
+  background: white;
+
+  border-radius: 24px;
+
+  overflow: hidden;
+
+  text-align: center;
+
+  box-shadow:
+    0 10px 30px
+    rgba(0,0,0,0.08);
+
+  transition: 0.3s;
+
+}
+
+
+
+.doctor-card:hover{
+
+  transform: translateY(-8px);
+
+}
+
+
+
+/* ================= IMAGE ================= */
+
+.doctor-card img{
+
+  width: 100%;
+
+  height: 280px;
+
+  object-fit: cover;
+
+}
+
+
+
+/* ================= TEXT ================= */
+
+.doctor-card h2{
+
+  font-size: 24px;
+
+  margin-top: 20px;
+
+  color: #222;
+
+}
+
+
+
+.doctor-card h3{
+
+  font-size: 18px;
+
+  color: #0d6efd;
+
+  margin: 10px 0;
+
+}
+
+
+
+.doctor-card p{
+
+  color: #666;
+
+  margin-bottom: 20px;
+
+}
+
+
+
+/* ================= BUTTON ================= */
+
+.doctor-card button{
+
+  margin-bottom: 25px;
+
+  padding: 12px 24px;
+
+  border: none;
+
+  border-radius: 12px;
+
+  background:
+  linear-gradient(
+    90deg,
+    #0d6efd,
+    #4ea5ff
+  );
+
+  color: white;
+
+  font-size: 15px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+
+}
+
+
+
+.doctor-card button:hover{
+
+  transform: scale(1.05);
+
+}
+
+
+
+/* ================= VIEW ALL ================= */
+
+.view-all{
+
+  margin-top: 50px;
+
+  text-align: center;
+
+}
+
+
+
+.view-all button{
+
+  padding: 14px 34px;
+
+  border: none;
+
+  border-radius: 14px;
+
+  background: #0d6efd;
+
+  color: white;
+
+  font-size: 16px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+}
+
+
+
+/* ================= MOBILE ================= */
+
+@media screen and (max-width:768px){
+
+  .featured-doctors{
+
+    padding: 70px 5%;
+
+  }
+
+
+
+  .section-title h1{
+
+    font-size: 32px;
+
+  }
+
+
+
+  .doctor-card img{
+
+    height: 240px;
+
+  }
+
+}

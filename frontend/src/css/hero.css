@@ -1,0 +1,326 @@
+/* ================= HERO SECTION ================= */
+
+.hero{
+
+  width: 100%;
+
+  min-height: 90vh;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  padding: 70px 8%;
+
+  background:
+  linear-gradient(
+    135deg,
+    #f5f9ff,
+    #eef5ff
+  );
+
+  overflow: hidden;
+
+}
+
+
+
+/* ================= LEFT SIDE ================= */
+
+.hero-left{
+
+  flex: 1;
+
+}
+
+
+
+.hero-left h1{
+
+  font-size: 64px;
+
+  color: #0d6efd;
+
+  line-height: 1.2;
+
+  margin-bottom: 25px;
+
+  font-weight: 700;
+
+}
+
+
+
+.hero-left p{
+
+  font-size: 18px;
+
+  line-height: 1.9;
+
+  color: #555;
+
+  margin-bottom: 35px;
+
+  max-width: 600px;
+
+}
+
+
+
+/* ================= BUTTONS ================= */
+
+.hero-buttons{
+
+  display: flex;
+
+  gap: 20px;
+
+  flex-wrap: wrap;
+
+}
+
+
+
+/* COMMON BUTTON */
+
+.hero-buttons button{
+
+  padding: 15px 32px;
+
+  border: none;
+
+  border-radius: 14px;
+
+  font-size: 16px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+
+}
+
+
+
+/* BOOK BUTTON */
+
+.hero-buttons button:first-child{
+
+  background:
+  linear-gradient(
+    90deg,
+    #0d6efd,
+    #4ea5ff
+  );
+
+  color: white;
+
+  box-shadow:
+    0 10px 25px
+    rgba(13,110,253,0.25);
+
+}
+
+
+
+/* BOOK BUTTON HOVER */
+
+.hero-buttons button:first-child:hover{
+
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 15px 30px
+    rgba(13,110,253,0.35);
+
+}
+
+
+
+/* EXPLORE BUTTON */
+
+.explore-btn{
+
+  background: white;
+
+  color: #0d6efd;
+
+  border:
+    2px solid #0d6efd !important;
+
+}
+
+
+
+/* EXPLORE BUTTON HOVER */
+
+.explore-btn:hover{
+
+  background: #0d6efd;
+
+  color: white;
+
+  transform: translateY(-4px);
+
+}
+
+
+
+/* ================= RIGHT SIDE ================= */
+
+.hero-right{
+
+  flex: 1;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+}
+
+
+
+/* IMAGE */
+
+.hero-right img{
+
+  width: 100%;
+
+  max-width: 520px;
+
+  border-radius: 30px;
+
+  object-fit: cover;
+
+  box-shadow:
+    0 20px 40px
+    rgba(0,0,0,0.12);
+
+  transition: 0.4s;
+
+}
+
+
+
+/* IMAGE HOVER */
+
+.hero-right img:hover{
+
+  transform: scale(1.03);
+
+}
+
+
+
+/* ================= TABLET ================= */
+
+@media screen and (max-width:992px){
+
+  .hero{
+
+    padding: 60px 6%;
+
+    gap: 40px;
+
+  }
+
+
+
+  .hero-left h1{
+
+    font-size: 52px;
+
+  }
+
+}
+
+
+
+/* ================= MOBILE ================= */
+
+@media screen and (max-width:768px){
+
+  .hero{
+
+    flex-direction: column;
+
+    text-align: center;
+
+    padding: 60px 5%;
+
+  }
+
+
+
+  .hero-left h1{
+
+    font-size: 42px;
+
+  }
+
+
+
+  .hero-left p{
+
+    font-size: 16px;
+
+    margin: auto;
+
+    margin-bottom: 30px;
+
+  }
+
+
+
+  .hero-buttons{
+
+    justify-content: center;
+
+  }
+
+
+
+  .hero-right img{
+
+    max-width: 100%;
+
+  }
+
+}
+
+
+
+/* ================= SMALL MOBILE ================= */
+
+@media screen and (max-width:480px){
+
+  .hero-left h1{
+
+    font-size: 34px;
+
+  }
+
+
+
+  .hero-buttons button{
+
+    width: 100%;
+
+  }
+
+}
+
+
+
+/* ================= SMOOTH SCROLL ================= */
+
+html{
+
+  scroll-behavior: smooth;
+
+}

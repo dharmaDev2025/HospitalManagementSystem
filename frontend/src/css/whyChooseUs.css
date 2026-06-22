@@ -1,0 +1,222 @@
+.why-section{
+
+  padding: 90px 7%;
+
+  background:
+  linear-gradient(
+    135deg,
+    #eef5ff,
+    #f8fbff
+  );
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(2,1fr);
+
+  gap: 60px;
+
+  align-items: center;
+
+}
+
+
+
+/* ================= LEFT ================= */
+
+.why-left h1{
+
+  font-size: 48px;
+
+  color: #222;
+
+  margin-bottom: 20px;
+
+}
+
+
+
+.why-left p{
+
+  font-size: 17px;
+
+  line-height: 1.9;
+
+  color: #666;
+
+  margin-bottom: 30px;
+
+}
+
+
+
+.why-left button{
+
+  padding: 14px 30px;
+
+  border: none;
+
+  border-radius: 14px;
+
+  background:
+  linear-gradient(
+    90deg,
+    #0d6efd,
+    #4ea5ff
+  );
+
+  color: white;
+
+  font-size: 16px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+
+}
+
+
+
+.why-left button:hover{
+
+  transform: translateY(-3px);
+
+}
+
+
+
+/* ================= RIGHT ================= */
+
+.why-right{
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(2,1fr);
+
+  gap: 25px;
+
+}
+
+
+
+/* ================= CARD ================= */
+
+.why-card{
+
+  background: white;
+
+  padding: 35px 25px;
+
+  border-radius: 24px;
+
+  text-align: center;
+
+  box-shadow:
+    0 10px 25px
+    rgba(0,0,0,0.06);
+
+  transition: 0.3s;
+
+}
+
+
+
+.why-card:hover{
+
+  transform: translateY(-8px);
+
+}
+
+
+
+/* ================= ICON ================= */
+
+.why-icon{
+
+  width: 75px;
+
+  height: 75px;
+
+  margin: auto;
+
+  margin-bottom: 20px;
+
+  border-radius: 20px;
+
+  background:
+  linear-gradient(
+    135deg,
+    #0d6efd,
+    #4ea5ff
+  );
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  color: white;
+
+  font-size: 32px;
+
+}
+
+
+
+/* ================= TEXT ================= */
+
+.why-card h2{
+
+  font-size: 34px;
+
+  color: #222;
+
+  margin-bottom: 10px;
+
+}
+
+
+
+.why-card p{
+
+  color: #666;
+
+  font-size: 16px;
+
+}
+
+
+
+/* ================= MOBILE ================= */
+
+@media screen and (max-width:768px){
+
+  .why-section{
+
+    grid-template-columns: 1fr;
+
+    padding: 70px 5%;
+
+  }
+
+
+
+  .why-left h1{
+
+    font-size: 36px;
+
+  }
+
+
+
+  .why-right{
+
+    grid-template-columns: 1fr;
+
+  }
+
+}

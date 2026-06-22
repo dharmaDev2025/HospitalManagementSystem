@@ -1,0 +1,225 @@
+/* ================= MAIN CONTAINER ================= */
+
+.admin-orders-container {
+
+  width: 100%;
+
+  min-height: 100vh;
+
+  padding: 90px 6% 40px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #eef5ff,
+      #f8fbff
+    );
+}
+
+/* ================= TOP BAR ================= */
+
+.orders-top-bar {
+
+  margin-bottom: 30px;
+}
+
+.orders-top-bar h1 {
+
+  font-size: 32px;
+
+  color: #222;
+
+  font-weight: 700;
+}
+
+/* ================= GRID ================= */
+
+.orders-grid {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(330px, 1fr));
+
+  gap: 22px;
+}
+
+/* ================= CARD ================= */
+
+.order-card {
+
+  background: white;
+
+  border-radius: 18px;
+
+  padding: 22px;
+
+  box-shadow:
+    0 6px 20px rgba(0,0,0,0.08);
+
+  transition: 0.3s;
+}
+
+.order-card:hover {
+
+  transform: translateY(-5px);
+}
+
+/* ================= USER ================= */
+
+.order-user {
+
+  margin-bottom: 18px;
+
+  border-bottom:
+    1px solid #eee;
+
+  padding-bottom: 12px;
+}
+
+.order-user h3 {
+
+  color: #222;
+
+  margin-bottom: 5px;
+}
+
+.order-user p {
+
+  color: #666;
+
+  font-size: 14px;
+}
+
+/* ================= SECTION ================= */
+
+.order-section {
+
+  margin-bottom: 16px;
+}
+
+.order-section strong {
+
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: #222;
+}
+
+.order-section p {
+
+  color: #555;
+
+  line-height: 1.5;
+}
+
+/* ================= MEDICINES ================= */
+
+.medicine-item {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  background: #f5f8ff;
+
+  padding: 10px 12px;
+
+  border-radius: 10px;
+
+  margin-bottom: 8px;
+
+  font-size: 14px;
+}
+
+/* ================= PAYMENT ================= */
+
+.payment-status {
+
+  color: green;
+
+  font-weight: 600;
+
+  text-transform: capitalize;
+}
+
+/* ================= SELECT ================= */
+
+.order-section select {
+
+  width: 100%;
+
+  padding: 10px;
+
+  border-radius: 10px;
+
+  border: 1px solid #ddd;
+
+  outline: none;
+
+  font-size: 14px;
+
+  cursor: pointer;
+
+  background: white;
+}
+
+/* ================= NO ORDERS ================= */
+
+.no-orders {
+
+  color: #555;
+
+  text-align: center;
+
+  margin-top: 50px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+/* TABLET */
+
+@media (max-width: 768px) {
+
+  .admin-orders-container {
+
+    padding: 85px 4% 30px;
+  }
+
+  .orders-top-bar h1 {
+
+    font-size: 26px;
+  }
+
+  .orders-grid {
+
+    grid-template-columns: 1fr;
+  }
+}
+
+/* MOBILE */
+
+@media (max-width: 480px) {
+
+  .order-card {
+
+    padding: 16px;
+  }
+
+  .medicine-item {
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 4px;
+  }
+
+  .orders-top-bar h1 {
+
+    font-size: 22px;
+  }
+}
