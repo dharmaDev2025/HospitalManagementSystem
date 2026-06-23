@@ -130,9 +130,10 @@ const BloodManagement = () => {
   };
 
   const handleUpdate = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    await axios.put(
+  try {
+    const res = await axios.put(
       `${BASE_URL}/api/blood/status/${selectedRequest._id}`,
       formData,
       {
@@ -140,11 +141,26 @@ const BloodManagement = () => {
       }
     );
 
+    alert(res.data.message);
+
     setShowModal(false);
+
     fetchRequests();
     fetchStock();
-  };
 
+  } catch (error) {
+
+    console.log(
+      "Blood Request Error:",
+      error.response?.data
+    );
+
+    alert(
+      error.response?.data?.message ||
+      "Failed to update blood request"
+    );
+  }
+};
   return (
     <>
       <Navbar />
