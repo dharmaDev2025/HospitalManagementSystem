@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar";
 import "../css/profilepage.css";
 
 const ProfilePage = () => {
-  const BASE_URL = "http://localhost:5000";
+  const BASE_URL = "https://hospitalmanagementsystem-nz84.onrender.com";
 
   const [user, setUser] = useState({});
   const [editMode, setEditMode] = useState(false);
