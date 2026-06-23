@@ -5,12 +5,12 @@ import axios from "axios";
 import Navbar from "../components/Navbar";
 import "../css/chatpage.css";
 
-const socket = io("http://localhost:5000", {
+const socket = io("https://hospitalmanagementsystem-nz84.onrender.com", {
   transports: ["websocket"],
 });
 
 const ChatPage = () => {
-  const BASE_URL = "http://localhost:5000";
+  const BASE_URL = "https://hospitalmanagementsystem-nz84.onrender.com";
   const { appointmentId } = useParams();
 
   const user = JSON.parse(localStorage.getItem("user")) || {};
