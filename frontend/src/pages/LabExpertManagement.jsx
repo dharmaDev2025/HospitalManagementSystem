@@ -28,20 +28,34 @@ const LabExpertManagement = () => {
     expertId: "",
   });
 
-  const fetchExperts = async () => {
-    const res = await axios.get(`${BASE_URL}/api/lab/experts`, {
-      headers: { role: "admin" },
-    });
+  const headers = {
+    role: "admin",
+  };
 
-    setExperts(res.data.experts || []);
+  const fetchExperts = async () => {
+    try {
+      const res = await axios.get(`${BASE_URL}/api/lab/experts`, {
+        headers,
+      });
+
+      setExperts(res.data.experts || []);
+    } catch (error) {
+      console.log(error);
+      alert(error.response?.data?.message || "Failed to load experts");
+    }
   };
 
   const fetchTests = async () => {
-    const res = await axios.get(`${BASE_URL}/api/lab/all-tests`, {
-      headers: { role: "admin" },
-    });
+    try {
+      const res = await axios.get(`${BASE_URL}/api/lab/all-tests`, {
+        headers,
+      });
 
-    setTests(res.data.tests || []);
+      setTests(res.data.tests || []);
+    } catch (error) {
+      console.log(error);
+      alert(error.response?.data?.message || "Failed to load tests");
+    }
   };
 
   useEffect(() => {
@@ -71,34 +85,48 @@ const LabExpertManagement = () => {
   const saveExpert = async (e) => {
     e.preventDefault();
 
-    if (editExpertId) {
-      await axios.put(
-        `${BASE_URL}/api/lab/update-expert/${editExpertId}`,
-        expertForm,
-        { headers: { role: "admin" } }
-      );
-    } else {
-      await axios.post(
-        `${BASE_URL}/api/lab/add-expert`,
-        expertForm,
-        { headers: { role: "admin" } }
-      );
-    }
+    try {
+      if (editExpertId) {
+        await axios.put(
+          `${BASE_URL}/api/lab/update-expert/${editExpertId}`,
+          expertForm,
+          { headers }
+        );
+      } else {
+        await axios.post(
+          `${BASE_URL}/api/lab/add-expert`,
+          expertForm,
+          { headers }
+        );
+      }
 
-    setShowExpertModal(false);
-    resetExpertForm();
-    fetchExperts();
+      setShowExpertModal(false);
+      resetExpertForm();
+      fetchExperts();
+      fetchTests();
+    } catch (error) {
+      console.log(error.response?.data || error);
+      alert(error.response?.data?.message || "Failed to save expert");
+    }
   };
 
   const deleteExpert = async (id) => {
     if (!window.confirm("Delete this lab expert?")) return;
 
-    await axios.delete(`${BASE_URL}/api/lab/delete-expert/${id}`, {
-      headers: { role: "admin" },
-    });
+    try {
+      const res = await axios.delete(
+        `${BASE_URL}/api/lab/delete-expert/${id}`,
+        { headers }
+      );
 
-    fetchExperts();
-    fetchTests();
+      alert(res.data.message || "Lab expert deleted");
+
+      await fetchExperts();
+      await fetchTests();
+    } catch (error) {
+      console.log("DELETE EXPERT ERROR:", error.response?.data || error);
+      alert(error.response?.data?.message || "Failed to delete lab expert");
+    }
   };
 
   const openEditExpert = (expert) => {
@@ -117,33 +145,46 @@ const LabExpertManagement = () => {
   const saveTest = async (e) => {
     e.preventDefault();
 
-    if (editTestId) {
-      await axios.put(
-        `${BASE_URL}/api/lab/update-test/${editTestId}`,
-        testForm,
-        { headers: { role: "admin" } }
-      );
-    } else {
-      await axios.post(
-        `${BASE_URL}/api/lab/add-test`,
-        testForm,
-        { headers: { role: "admin" } }
-      );
-    }
+    try {
+      if (editTestId) {
+        await axios.put(
+          `${BASE_URL}/api/lab/update-test/${editTestId}`,
+          testForm,
+          { headers }
+        );
+      } else {
+        await axios.post(
+          `${BASE_URL}/api/lab/add-test`,
+          testForm,
+          { headers }
+        );
+      }
 
-    setShowTestModal(false);
-    resetTestForm();
-    fetchTests();
+      setShowTestModal(false);
+      resetTestForm();
+      fetchTests();
+    } catch (error) {
+      console.log(error.response?.data || error);
+      alert(error.response?.data?.message || "Failed to save test");
+    }
   };
 
   const deleteTest = async (id) => {
     if (!window.confirm("Delete this test?")) return;
 
-    await axios.delete(`${BASE_URL}/api/lab/delete-test/${id}`, {
-      headers: { role: "admin" },
-    });
+    try {
+      const res = await axios.delete(
+        `${BASE_URL}/api/lab/delete-test/${id}`,
+        { headers }
+      );
 
-    fetchTests();
+      alert(res.data.message || "Lab test deleted");
+
+      await fetchTests();
+    } catch (error) {
+      console.log("DELETE TEST ERROR:", error.response?.data || error);
+      alert(error.response?.data?.message || "Failed to delete test");
+    }
   };
 
   const openEditTest = (test) => {
@@ -218,7 +259,7 @@ const LabExpertManagement = () => {
                 <tr key={expert._id}>
                   <td>{expert.name}</td>
                   <td>{expert.email}</td>
-                  <td>{expert.phone}</td>
+                  <td>{expert.phone || "N/A"}</td>
                   <td>
                     <button
                       className="edit-btn"
@@ -236,6 +277,12 @@ const LabExpertManagement = () => {
                   </td>
                 </tr>
               ))}
+
+              {experts.length === 0 && (
+                <tr>
+                  <td colSpan="4">No lab experts found</td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>
@@ -276,6 +323,12 @@ const LabExpertManagement = () => {
                   </td>
                 </tr>
               ))}
+
+              {tests.length === 0 && (
+                <tr>
+                  <td colSpan="4">No lab tests found</td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>
@@ -283,9 +336,7 @@ const LabExpertManagement = () => {
         {showExpertModal && (
           <div className="modal-overlay">
             <div className="modal-box">
-              <h2>
-                {editExpertId ? "Update Lab Expert" : "Add Lab Expert"}
-              </h2>
+              <h2>{editExpertId ? "Update Lab Expert" : "Add Lab Expert"}</h2>
 
               <form onSubmit={saveExpert}>
                 <input
@@ -349,7 +400,10 @@ const LabExpertManagement = () => {
                   <button
                     type="button"
                     className="cancel-btn"
-                    onClick={() => setShowExpertModal(false)}
+                    onClick={() => {
+                      setShowExpertModal(false);
+                      resetExpertForm();
+                    }}
                   >
                     Cancel
                   </button>
@@ -362,9 +416,7 @@ const LabExpertManagement = () => {
         {showTestModal && (
           <div className="modal-overlay">
             <div className="modal-box">
-              <h2>
-                {editTestId ? "Update Lab Test" : "Add Lab Test"}
-              </h2>
+              <h2>{editTestId ? "Update Lab Test" : "Add Lab Test"}</h2>
 
               <form onSubmit={saveTest}>
                 <input
@@ -420,7 +472,10 @@ const LabExpertManagement = () => {
                   <button
                     type="button"
                     className="cancel-btn"
-                    onClick={() => setShowTestModal(false)}
+                    onClick={() => {
+                      setShowTestModal(false);
+                      resetTestForm();
+                    }}
                   >
                     Cancel
                   </button>
