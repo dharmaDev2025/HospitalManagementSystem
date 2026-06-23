@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar";
 import "../css/blood.css";
 
 const Blood = () => {
-  const BASE_URL = "http://localhost:5000";
+  const BASE_URL = "https://hospitalmanagementsystem-nz84.onrender.com";
   const user = JSON.parse(localStorage.getItem("user")) || {};
 
   const [bloodStock, setBloodStock] = useState([]);
