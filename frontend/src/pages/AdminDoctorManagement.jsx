@@ -35,7 +35,7 @@ function AdminDoctorManagement() {
     try {
 
       const res = await axios.get(
-        "http://localhost:5000/api/doctors"
+        "https://hospitalmanagementsystem-nz84.onrender.com/api/doctors"
       );
 
       setDoctors(res.data.doctors);
@@ -121,7 +121,7 @@ function AdminDoctorManagement() {
       });
 
       await axios.post(
-        "http://localhost:5000/api/doctors/add",
+        "https://hospitalmanagementsystem-nz84.onrender.com/api/doctors/add",
         data,
         {
           headers: {
@@ -162,7 +162,7 @@ function AdminDoctorManagement() {
       setLoading(true);
 
       await axios.delete(
-        `http://localhost:5000/api/doctors/delete/${id}`,
+        `https://hospitalmanagementsystem-nz84.onrender.com/api/doctors/delete/${id}`,
         {
           headers: {
             role: "admin",
@@ -222,7 +222,7 @@ function AdminDoctorManagement() {
       });
 
       await axios.put(
-        `http://localhost:5000/api/doctors/update/${editId}`,
+        `https://hospitalmanagementsystem-nz84.onrender.com/api/doctors/update/${editId}`,
         data,
         {
           headers: {
