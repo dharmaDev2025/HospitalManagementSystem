@@ -11,7 +11,7 @@ function AdminBedBookings() {
     useState([]);
 
   const BASE_URL =
-    "http://localhost:5000";
+    "https://hospitalmanagementsystem-nz84.onrender.com";
 
   const getHeaders = () => {
     const token =
