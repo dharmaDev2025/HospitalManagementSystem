@@ -63,7 +63,7 @@ function AdminMedicineManagement() {
         const res =
           await axios.get(
 
-            "http://localhost:5000/api/medicines"
+            "https://hospitalmanagementsystem-nz84.onrender.com/api/medicines"
           );
 
         setMedicines(
@@ -266,7 +266,7 @@ function AdminMedicineManagement() {
 
         await axios.post(
 
-          "http://localhost:5000/api/medicines/add",
+          "https://hospitalmanagementsystem-nz84.onrender.com/api/medicines/add",
 
           formData,
 
@@ -328,7 +328,7 @@ function AdminMedicineManagement() {
 
         await axios.delete(
 
-          `http://localhost:5000/api/medicines/${id}`,
+          `https://hospitalmanagementsystem-nz84.onrender.com/api/medicines/${id}`,
 
           {
 
@@ -460,7 +460,7 @@ function AdminMedicineManagement() {
 
         await axios.put(
 
-          `http://localhost:5000/api/medicines/update/${editId}`,
+          `https://hospitalmanagementsystem-nz84.onrender.com/api/medicines/update/${editId}`,
 
           formData,
 
