@@ -8,7 +8,7 @@ import Navbar from "../components/Navbar";
 import "../css/myappointment.css";
 
 const MyAppointments = () => {
-  const BASE_URL = "http://localhost:5000";
+  const BASE_URL = "https://hospitalmanagementsystem-nz84.onrender.com";
 
   const navigate = useNavigate();
   const [params] = useSearchParams();
