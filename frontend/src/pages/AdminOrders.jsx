@@ -62,7 +62,7 @@ function AdminOrders() {
 
         await axios.put(
 
-          `http://localhost:5000/api/orders/status/${id}`,
+          `https://hospitalmanagementsystem-nz84.onrender.com/api/orders/status/${id}`,
 
           {
 
