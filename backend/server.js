@@ -38,19 +38,31 @@ app.use(
   express.static("uploads")
 );
 
+// ================= CORS FIX =================
+
 const allowedOrigins = [
   "http://localhost:5173",
   process.env.FRONTEND_URL,
-];
+].filter(Boolean);
+
+console.log("Allowed Origins:", allowedOrigins);
 
 app.use(
   cors({
-    origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
+    origin: (origin, callback) => {
+      if (!origin) {
+        return callback(null, true);
       }
+
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      console.log("Blocked by CORS:", origin);
+
+      return callback(
+        new Error(`CORS blocked: ${origin}`)
+      );
     },
     credentials: true,
   })
@@ -82,32 +94,34 @@ const PORT = process.env.PORT || 5000;
 
 const server = http.createServer(app);
 
+// ================= SOCKET.IO =================
+
 const io = new Server(server, {
   cors: {
     origin: allowedOrigins,
-    credentials: true,
     methods: ["GET", "POST"],
+    credentials: true,
   },
 });
+
+// ================= SOCKET CONNECTION =================
 
 io.on("connection", (socket) => {
   console.log("Socket connected:", socket.id);
 
-  // ================= DOCTOR / PATIENT CHAT =================
-
   socket.on("joinAppointment", (appointmentId) => {
     socket.join(appointmentId);
-    console.log("Joined appointment room:", appointmentId);
   });
 
   socket.on("sendMessage", async (data) => {
     try {
-      const savedMessage = await ChatMessage.create({
-        appointmentId: data.appointmentId,
-        senderId: data.senderId,
-        receiverId: data.receiverId,
-        message: data.message,
-      });
+      const savedMessage =
+        await ChatMessage.create({
+          appointmentId: data.appointmentId,
+          senderId: data.senderId,
+          receiverId: data.receiverId,
+          message: data.message,
+        });
 
       io.to(data.appointmentId).emit(
         "receiveMessage",
@@ -118,51 +132,69 @@ io.on("connection", (socket) => {
     }
   });
 
-  // ================= VIDEO CALL WEBRTC =================
+  // VIDEO CALL
 
-socket.on("call-user", (data) => {
-  socket.to(data.appointmentId).emit("incoming-call", data);
-});
+  socket.on("call-user", (data) => {
+    socket
+      .to(data.appointmentId)
+      .emit("incoming-call", data);
+  });
 
-socket.on("answer-call", (data) => {
-  socket.to(data.appointmentId).emit("call-answered", data);
-});
+  socket.on("answer-call", (data) => {
+    socket
+      .to(data.appointmentId)
+      .emit("call-answered", data);
+  });
 
-socket.on("ice-candidate", (data) => {
-  socket.to(data.appointmentId).emit("ice-candidate", data);
-});
+  socket.on("ice-candidate", (data) => {
+    socket
+      .to(data.appointmentId)
+      .emit("ice-candidate", data);
+  });
 
-socket.on("reject-call", (data) => {
-  socket.to(data.appointmentId).emit("call-rejected");
-});
+  socket.on("reject-call", (data) => {
+    socket
+      .to(data.appointmentId)
+      .emit("call-rejected");
+  });
 
-socket.on("end-call", (data) => {
-  socket.to(data.appointmentId).emit("call-ended");
-});
+  socket.on("end-call", (data) => {
+    socket
+      .to(data.appointmentId)
+      .emit("call-ended");
+  });
 
-  // ================= LAB EXPERT CHAT =================
+  // LAB CHAT
 
   socket.on("joinLabBooking", (bookingId) => {
     socket.join(bookingId);
   });
 
   socket.on("sendLabMessage", (data) => {
-    io.to(data.bookingId).emit("receiveLabMessage", {
-      bookingId: data.bookingId,
-      senderId: data.senderId,
-      receiverId: data.receiverId,
-      message: data.message,
-      createdAt: new Date(),
-    });
+    io.to(data.bookingId).emit(
+      "receiveLabMessage",
+      {
+        bookingId: data.bookingId,
+        senderId: data.senderId,
+        receiverId: data.receiverId,
+        message: data.message,
+        createdAt: new Date(),
+      }
+    );
   });
 
-  // ================= DISCONNECT =================
-
   socket.on("disconnect", () => {
-    console.log("Socket disconnected:", socket.id);
+    console.log(
+      "Socket disconnected:",
+      socket.id
+    );
   });
 });
 
+// ================= START SERVER =================
+
 server.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(
+    `Server running on port ${PORT}`
+  );
 });
