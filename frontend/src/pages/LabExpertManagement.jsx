@@ -3,7 +3,7 @@ import axios from "axios";
 import Navbar from "../components/Navbar";
 import "./../css/labexpertmanagement.css";
 
-const BASE_URL = "http://localhost:5000";
+const BASE_URL = "https://hospitalmanagementsystem-nz84.onrender.com";
 
 const LabExpertManagement = () => {
   const [experts, setExperts] = useState([]);
