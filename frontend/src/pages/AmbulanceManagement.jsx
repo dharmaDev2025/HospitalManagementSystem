@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar";
 import "./../css/ambulancemanagement.css";
 
 const AmbulanceManagement = () => {
-  const BASE_URL = "http://localhost:5000";
+  const BASE_URL = "https://hospitalmanagementsystem-nz84.onrender.com";
 
   const roleHeader = {
     headers: {
