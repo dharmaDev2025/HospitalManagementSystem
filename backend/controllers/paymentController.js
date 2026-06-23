@@ -64,10 +64,10 @@ export const createCheckoutSession = async (req, res) => {
         },
 
         success_url:
-          "http://localhost:5173/medicines",
+          `${process.env.FRONTEND_URL}/medicines`,
 
         cancel_url:
-          "http://localhost:5173/medicines",
+        `${process.env.FRONTEND_URL}/medicines`,
       });
 
     res.status(200).json({
@@ -141,10 +141,10 @@ export const createBedCheckoutSession = async (req, res) => {
         },
 
         success_url:
-          "http://localhost:5173/bed-booking",
+         `${process.env.FRONTEND_URL}/bed-booking`,
 
         cancel_url:
-          "http://localhost:5173/bed-booking",
+       `${process.env.FRONTEND_URL}/bed-booking`,
       });
 
     res.status(200).json({
