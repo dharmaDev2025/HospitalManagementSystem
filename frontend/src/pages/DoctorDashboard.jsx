@@ -5,10 +5,10 @@ import Navbar from "../components/Navbar";
 import "../css/doctordashboard.css";
 import { useNavigate } from "react-router-dom";
 
-const socket = io("http://localhost:5000");
+const socket = io("https://hospitalmanagementsystem-nz84.onrender.com");
 
 const DoctorDashboard = () => {
-  const BASE_URL = "http://localhost:5000";
+  const BASE_URL = "https://hospitalmanagementsystem-nz84.onrender.com";
   const navigate = useNavigate();
 
   const localUser =
