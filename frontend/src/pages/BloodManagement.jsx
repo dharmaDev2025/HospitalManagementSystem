@@ -6,7 +6,7 @@ import "../css/bloodmanagement.css";
 const BLOOD_GROUPS = ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"];
 
 const BloodManagement = () => {
-  const BASE_URL = "http://localhost:5000";
+  const BASE_URL = "https://hospitalmanagementsystem-nz84.onrender.com";
 
   const [stock, setStock] = useState([]);
   const [requests, setRequests] = useState([]);
