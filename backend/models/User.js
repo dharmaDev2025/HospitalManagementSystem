@@ -24,7 +24,7 @@ const userSchema = new mongoose.Schema(
 
     role: {
       type: String,
-      enum: ["admin", "doctor", "patient","labExpert"],
+      enum: ["admin", "doctor", "patient", "labExpert"],
       default: "patient",
     },
 
@@ -36,6 +36,18 @@ const userSchema = new mongoose.Schema(
     profilePic: {
       type: String,
       default: "",
+    },
+
+    // ================= OTP FOR FORGOT PASSWORD =================
+
+    otp: {
+      type: String,
+      default: "",
+    },
+
+    otpExpire: {
+      type: Date,
+      default: null,
     },
   },
   {

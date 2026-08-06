@@ -358,6 +358,9 @@ export const getPatientAppointments = async (req, res) => {
 
 export const getDoctorAppointments = async (req, res) => {
   try {
+    console.log("==================================");
+    console.log("Doctor ID from URL:", req.params.doctorId);
+
     const appointments = await Appointment.find({
       doctorId: req.params.doctorId,
     })
@@ -371,11 +374,15 @@ export const getDoctorAppointments = async (req, res) => {
       })
       .sort({ createdAt: -1 });
 
+    console.log("Appointments Found:", appointments.length);
+    console.log(appointments);
+
     res.status(200).json({
       success: true,
       appointments,
     });
   } catch (error) {
+    console.log(error);
     res.status(500).json({
       success: false,
       message: error.message,
@@ -388,6 +395,7 @@ export const getDoctorAppointments = async (req, res) => {
 export const updateAppointmentStatus = async (req, res) => {
   try {
     const { status } = req.body;
+    console.log("Doctor ID from URL:", req.params.doctorId);
 
     const appointment =
       await Appointment.findByIdAndUpdate(
@@ -395,6 +403,7 @@ export const updateAppointmentStatus = async (req, res) => {
         { status },
         { new: true }
       );
+      console.log("Appointments:", appointments);
 
     res.status(200).json({
       success: true,

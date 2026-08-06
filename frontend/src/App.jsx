@@ -34,6 +34,9 @@ import MyAppointments from "./pages/MyAppointments";
 import ChatPage from "./pages/ChatPage";
 import MyPrescriptions from "./pages/MyPrescriptions";
 import ProfilePage from "./pages/ProfilePage";
+import VerifyOtp from "./pages/VerifyOtp";
+import ForgotPassword from "./pages/ForgotPassword";
+import  ResetPassword from "./pages/ResetPassword"
 
 
 
@@ -132,6 +135,11 @@ path="/admin/beds"  element={<BedManagement/>}
   path="/bed-booking"
   element={<Bed />}
 />
+<Route path="/forgot-password" element={<ForgotPassword />} />
+
+<Route path="/verify-otp" element={<VerifyOtp />} />
+
+<Route path="/reset-password" element={<ResetPassword />} />
 
 
     </Routes>
