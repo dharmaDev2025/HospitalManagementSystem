@@ -1,4 +1,5 @@
 import User from "../models/User.js";
+import Doctor from "../models/Doctor.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import sendMail from "../utils/sendMail.js";
@@ -186,16 +187,33 @@ export const loginUser = async (req, res) => {
     }
 
     const token = generateToken({
-      id: user._id,
-      role: user.role,
-    });
+  id: user._id,
+  role: user.role,
+});
 
-    res.status(200).json({
-      success: true,
-      message: `${user.role} logged in successfully`,
-      token,
-      user,
-    });
+// ================= GET DOCTOR ID =================
+
+let doctorId = null;
+
+if (user.role === "doctor") {
+  const doctor = await Doctor.findOne({
+    userId: user._id,
+  });
+
+  if (doctor) {
+    doctorId = doctor._id;
+  }
+}
+
+// ================= LOGIN RESPONSE =================
+
+res.status(200).json({
+  success: true,
+  message: `${user.role} logged in successfully`,
+  token,
+  user,
+  doctorId,
+});
   } catch (error) {
     console.log("LOGIN ERROR:", error.message);
 
