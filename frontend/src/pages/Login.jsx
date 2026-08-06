@@ -1,295 +1,166 @@
 import { useState, useContext } from "react";
-
 import axios from "axios";
-
-import {
-  useNavigate,
-  Link,
-} from "react-router-dom";
-
+import { useNavigate, Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
-
-import {
-  AppContext,
-} from "../context/AppContext";
-
+import { AppContext } from "../context/AppContext";
 import "./../css/login.css";
 
 function Login() {
-
   const navigate = useNavigate();
+  const { setUser } = useContext(AppContext);
 
-  const { setUser } =
-    useContext(AppContext);
-
-
-
-  const [formData, setFormData] =
-    useState({
-
-      email: "",
-
-      password: "",
-
-      role: "",
-
-    });
-
-
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+    role: "",
+  });
 
   // ================= HANDLE INPUT =================
 
   const handleChange = (e) => {
-
     setFormData({
-
       ...formData,
-
-      [e.target.name]:
-        e.target.value,
-
+      [e.target.name]: e.target.value,
     });
-
   };
-
-
 
   // ================= HANDLE LOGIN =================
 
   const handleLogin = async (e) => {
-
     e.preventDefault();
 
-
-
     try {
+      const res = await axios.post(
+        "https://hospitalmanagementsystem-nz84.onrender.com/api/auth/login",
+        formData
+      );
 
-      const res =
-        await axios.post(
+      // ================= CLEAR PREVIOUS LOGIN DATA =================
 
-          "https://hospitalmanagementsystem-nz84.onrender.com/api/auth/login",
+      localStorage.removeItem("user");
+      localStorage.removeItem("token");
 
-          formData
-        );
+      // ================= SAVE NEW LOGIN =================
 
+      setUser(res.data.user);
 
+      localStorage.setItem(
+        "user",
+        JSON.stringify(res.data.user)
+      );
 
-     // ================= CLEAR PREVIOUS LOGIN DATA =================
-
-localStorage.removeItem("user");
-localStorage.removeItem("token");
-
-// ================= SAVE NEW USER =================
-
-setUser(res.data.user);
-
-localStorage.setItem(
-  "user",
-  JSON.stringify(res.data.user)
-);
-
-localStorage.setItem(
-  "token",
-  res.data.token
-);
-
+      localStorage.setItem(
+        "token",
+        res.data.token
+      );
 
       // ================= REDIRECT =================
 
-      const role =
-        res.data.user.role;
-
-
+      const role = res.data.user.role;
 
       if (role === "admin") {
-
-        navigate(
-          "/admin/dashboard"
-        );
-
+        navigate("/admin/dashboard");
+      } else if (role === "doctor") {
+        navigate("/doctor/dashboard");
+      } else if (role === "labExpert") {
+        navigate("/lab/dashboard");
+      } else {
+        navigate("/patient/dashboard");
       }
 
-      else if (
-        role === "doctor"
-      ) {
-
-        navigate(
-          "/doctor/dashboard"
-        );
-
-      }
-
-      else if (
-        role === "labExpert"
-      ) {
-
-        navigate(
-          "/lab/dashboard"
-        );
-
-      }
-
-      else {
-
-        navigate(
-          "/patient/dashboard"
-        );
-
-      }
-
-
-
-      alert(
-        res.data.message
-      );
-
+      alert(res.data.message);
     } catch (error) {
-
       alert(
-
         error.response?.data?.message ||
-
-        "Login Failed"
-
+          "Login Failed"
       );
-
     }
   };
 
-
-
   return (
-
     <>
-
       <Navbar />
 
-
-
       <div className="login-container">
-
         <div className="login-box">
+          <h1>Login</h1>
 
-          <h1>
-
-            Login
-
-          </h1>
-
-
-
-          <form
-            onSubmit={handleLogin}
-          >
-
+          <form onSubmit={handleLogin}>
             {/* EMAIL */}
 
             <input
-
               type="email"
-
               name="email"
-
               placeholder="Enter Email"
-
               value={formData.email}
-
               onChange={handleChange}
-
               required
-
             />
-
-
 
             {/* PASSWORD */}
 
             <input
-
               type="password"
-
               name="password"
-
               placeholder="Enter Password"
-
               value={formData.password}
-
               onChange={handleChange}
-
               required
-
             />
 
+            {/* FORGOT PASSWORD */}
 
+            <div
+              style={{
+                textAlign: "right",
+                marginBottom: "15px",
+              }}
+            >
+              <Link
+                to="/forgot-password"
+                style={{
+                  textDecoration: "none",
+                  color: "#007bff",
+                  fontSize: "14px",
+                  fontWeight: "500",
+                }}
+              >
+                Forgot Password?
+              </Link>
+            </div>
 
             {/* ROLE */}
 
             <select
-
               name="role"
-
               value={formData.role}
-
               onChange={handleChange}
-
               required
-
             >
-
-              <option value="">
-                Select Role
-              </option>
-
-              <option value="patient">
-                Patient
-              </option>
-
-              <option value="doctor">
-                Doctor
-              </option>
-
-              <option value="labExpert">
-                Lab Expert
-              </option>
-
-              <option value="admin">
-                Admin
-              </option>
-
+              <option value="">Select Role</option>
+              <option value="patient">Patient</option>
+              <option value="doctor">Doctor</option>
+              <option value="labExpert">Lab Expert</option>
+              <option value="admin">Admin</option>
             </select>
-
-
 
             {/* LOGIN BUTTON */}
 
             <button type="submit">
-
               Login
-
             </button>
-
           </form>
-
-
 
           {/* REGISTER LINK */}
 
           <p className="register-text">
-
-            New User ?
-
+            New User?{" "}
             <Link to="/register">
-
               Register
-
             </Link>
-
           </p>
-
         </div>
-
       </div>
-
     </>
   );
 }
