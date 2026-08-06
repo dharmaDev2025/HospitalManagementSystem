@@ -74,30 +74,24 @@ function Login() {
 
 
 
-      // ================= SAVE USER =================
+     // ================= CLEAR PREVIOUS LOGIN DATA =================
 
-      setUser(res.data.user);
+localStorage.removeItem("user");
+localStorage.removeItem("token");
 
+// ================= SAVE NEW USER =================
 
+setUser(res.data.user);
 
-      localStorage.setItem(
+localStorage.setItem(
+  "user",
+  JSON.stringify(res.data.user)
+);
 
-        "user",
-
-        JSON.stringify(
-          res.data.user
-        )
-      );
-
-
-
-      localStorage.setItem(
-
-        "token",
-
-        res.data.token
-      );
-
+localStorage.setItem(
+  "token",
+  res.data.token
+);
 
 
       // ================= REDIRECT =================
