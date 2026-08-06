@@ -13,7 +13,7 @@ function ForgotPassword() {
 
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/auth/forgot-password",
+        "https://hospitalmanagementsystem-nz84.onrender.com/api/auth/forgot-password",
         { email }
       );
 
