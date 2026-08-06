@@ -37,8 +37,9 @@ function Login() {
 
       // ================= CLEAR PREVIOUS LOGIN DATA =================
 
-      localStorage.removeItem("user");
-      localStorage.removeItem("token");
+     localStorage.removeItem("user");
+localStorage.removeItem("token");
+localStorage.removeItem("doctorId");
 
       // ================= SAVE NEW LOGIN =================
 
@@ -53,6 +54,9 @@ function Login() {
         "token",
         res.data.token
       );
+      if (res.data.doctorId) {
+  localStorage.setItem("doctorId", res.data.doctorId);
+}
 
       // ================= REDIRECT =================
 
