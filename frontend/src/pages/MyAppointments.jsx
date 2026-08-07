@@ -73,10 +73,10 @@ const MyAppointments = () => {
   const canChatNow = (app) => {
     if (app.status === "completed") return false;
 
-    if (!app.chatEnabled) return false;
+    if (!app.chatEnabled) return true;
 
     if (!app.appointmentDate || !app.appointmentTime) {
-      return false;
+      return true;
     }
 
     const appointmentDateTime = new Date(
