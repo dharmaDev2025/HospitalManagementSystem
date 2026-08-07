@@ -70,27 +70,11 @@ const MyAppointments = () => {
     }
   }, [patientId]);
 
-  const canChatNow = (app) => {
-    if (app.status === "completed") return false;
+ const canChatNow = (app) => {
+  if (app.status === "completed") return false;
 
-    if (!app.chatEnabled) return false;
-
-    if (!app.appointmentDate || !app.appointmentTime) {
-      return false;
-    }
-
-    const appointmentDateTime = new Date(
-      `${app.appointmentDate}T${app.appointmentTime}:00`
-    );
-
-    const now = new Date();
-
-    const diffMinutes =
-      (now - appointmentDateTime) / 1000 / 60;
-
-    return diffMinutes >= -15 && diffMinutes <= 120;
-  
-  };
+  return app.chatEnabled;
+};
 
   return (
     <>
