@@ -10,7 +10,7 @@ const socket = io("https://hospitalmanagementsystem-nz84.onrender.com", {
 });
 
 const ChatPage = () => {
-  const BASE_URL = "https://hospitalmanagementsystem-nz84.onrender.com";
+const BASE_URL = "https://hospitalmanagementsystem-nz84.onrender.com";
   const { appointmentId } = useParams();
 
   const user = JSON.parse(localStorage.getItem("user")) || {};
@@ -34,22 +34,33 @@ const ChatPage = () => {
 
   const headers = { role };
 
- const createPeerConnection = () => {
+const createPeerConnection = () => {
   const pc = new RTCPeerConnection({
     iceServers: [
       {
-        urls: [
-          "stun:stun.l.google.com:19302",
-          "stun:stun1.l.google.com:19302",
-          "stun:stun2.l.google.com:19302",
-          "stun:stun3.l.google.com:19302",
-        ],
+        urls: "stun:stun.l.google.com:19302",
       },
     ],
-    iceCandidatePoolSize: 10,
   });
 
-  // ===== DEBUG LOGS =====
+  pc.onicecandidate = (event) => {
+    if (event.candidate) {
+      console.log("Sending ICE Candidate");
+
+      socket.emit("ice-candidate", {
+        appointmentId,
+        candidate: event.candidate,
+      });
+    }
+  };
+
+  pc.ontrack = (event) => {
+    console.log("Remote Stream Received");
+
+    if (remoteVideoRef.current) {
+      remoteVideoRef.current.srcObject = event.streams[0];
+    }
+  };
 
   pc.onconnectionstatechange = () => {
     console.log("Connection:", pc.connectionState);
@@ -63,28 +74,8 @@ const ChatPage = () => {
     console.log("ICE Gathering:", pc.iceGatheringState);
   };
 
-  // ===== ICE CANDIDATE =====
-
-  pc.onicecandidate = (event) => {
-    if (event.candidate) {
-      socket.emit("ice-candidate", {
-        appointmentId,
-        candidate: event.candidate,
-      });
-    }
-  };
-
-  // ===== REMOTE STREAM =====
-
-  pc.ontrack = (event) => {
-    console.log("Remote stream received");
-
-    if (remoteVideoRef.current) {
-      remoteVideoRef.current.srcObject = event.streams[0];
-    }
-  };
-
   peerConnection.current = pc;
+
   return pc;
 };
 
@@ -117,86 +108,93 @@ const ChatPage = () => {
     setIsRinging(false);
   };
 
-  const startVideoCall = async () => {
-    try {
-      setShowCallScreen(true);
-      setIsRinging(true);
-      setIncomingCall(null);
+ const startVideoCall = async () => {
+  try {
+    setShowCallScreen(true);
+    setIncomingCall(null);
+    setIsRinging(true);
 
-      localStream.current = await navigator.mediaDevices.getUserMedia({
+    localStream.current =
+      await navigator.mediaDevices.getUserMedia({
         video: true,
         audio: true,
       });
 
-      if (localVideoRef.current) {
-        localVideoRef.current.srcObject = localStream.current;
-      }
+    localVideoRef.current.srcObject = localStream.current;
 
-      const pc = createPeerConnection();
+    const pc = createPeerConnection();
 
-      localStream.current.getTracks().forEach((track) => {
+    localStream.current
+      .getTracks()
+      .forEach((track) => {
         pc.addTrack(track, localStream.current);
       });
 
-      const offer = await pc.createOffer();
-      await pc.setLocalDescription(offer);
+    const offer = await pc.createOffer();
 
-      socket.emit("call-user", {
-        appointmentId,
-        from: userId,
-        offer,
-      });
+    await pc.setLocalDescription(offer);
 
-      setCallStarted(true);
-    } catch (error) {
-      console.log(error);
-      alert("Camera or microphone permission denied");
-      endCall(false);
-    }
-  };
+    socket.emit("call-user", {
+      appointmentId,
+      from: userId,
+      offer,
+    });
 
-  const acceptCall = async () => {
-    if (!incomingCall) return;
+    console.log("Offer Sent");
 
-    try {
-      setIsRinging(false);
+    setCallStarted(true);
 
-      localStream.current = await navigator.mediaDevices.getUserMedia({
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const acceptCall = async () => {
+  try {
+
+    setIncomingCall(null);
+    setIsRinging(false);
+
+    localStream.current =
+      await navigator.mediaDevices.getUserMedia({
         video: true,
         audio: true,
       });
 
-      if (localVideoRef.current) {
-        localVideoRef.current.srcObject = localStream.current;
-      }
+    localVideoRef.current.srcObject =
+      localStream.current;
 
-      const pc = createPeerConnection();
+    const pc = createPeerConnection();
 
-      localStream.current.getTracks().forEach((track) => {
+    localStream.current
+      .getTracks()
+      .forEach(track => {
         pc.addTrack(track, localStream.current);
       });
 
-      await pc.setRemoteDescription(
-        new RTCSessionDescription(incomingCall.offer)
-      );
+    await pc.setRemoteDescription(
+      new RTCSessionDescription(incomingCall.offer)
+    );
 
-      const answer = await pc.createAnswer();
-      await pc.setLocalDescription(answer);
+    const answer =
+      await pc.createAnswer();
 
-      socket.emit("answer-call", {
-        appointmentId,
-        from: userId,
-        answer,
-      });
+    await pc.setLocalDescription(answer);
 
-      setCallStarted(true);
-      setIncomingCall(null);
-    } catch (error) {
-      console.log(error);
-      alert("Camera or microphone permission denied");
-      endCall(false);
-    }
-  };
+    socket.emit("answer-call", {
+      appointmentId,
+      from: userId,
+      answer,
+    });
+
+    console.log("Answer Sent");
+
+    setCallStarted(true);
+
+  } catch (err) {
+    console.log(err);
+  }
+};
 
   const rejectCall = () => {
     socket.emit("reject-call", { appointmentId });
@@ -255,25 +253,39 @@ const ChatPage = () => {
       setIsRinging(true);
     });
 
-    socket.on("call-answered", async (data) => {
-      setIsRinging(false);
-      setIncomingCall(null);
-      setCallStarted(true);
+ socket.on("call-answered", async (data) => {
 
-      if (peerConnection.current) {
+    console.log("Answer Received");
+
+    if (peerConnection.current) {
+
         await peerConnection.current.setRemoteDescription(
-          new RTCSessionDescription(data.answer)
+            new RTCSessionDescription(data.answer)
         );
-      }
-    });
 
-    socket.on("ice-candidate", async (data) => {
-      if (peerConnection.current && data.candidate) {
+    }
+
+    setCallStarted(true);
+
+    setIncomingCall(null);
+
+    setIsRinging(false);
+
+});
+
+ socket.on("ice-candidate", async (data) => {
+
+    console.log("ICE Candidate Received");
+
+    if (peerConnection.current && data.candidate) {
+
         await peerConnection.current.addIceCandidate(
-          new RTCIceCandidate(data.candidate)
+            new RTCIceCandidate(data.candidate)
         );
-      }
-    });
+
+    }
+
+});
 
     socket.on("call-rejected", () => {
       alert("Call rejected");
