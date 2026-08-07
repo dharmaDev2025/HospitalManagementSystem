@@ -34,33 +34,59 @@ const ChatPage = () => {
 
   const headers = { role };
 
-  const createPeerConnection = () => {
-    const pc = new RTCPeerConnection({
-      iceServers: [
-        {
-          urls: "stun:stun.l.google.com:19302",
-        },
-      ],
-    });
+ const createPeerConnection = () => {
+  const pc = new RTCPeerConnection({
+    iceServers: [
+      {
+        urls: [
+          "stun:stun.l.google.com:19302",
+          "stun:stun1.l.google.com:19302",
+          "stun:stun2.l.google.com:19302",
+          "stun:stun3.l.google.com:19302",
+        ],
+      },
+    ],
+    iceCandidatePoolSize: 10,
+  });
 
-    pc.onicecandidate = (event) => {
-      if (event.candidate) {
-        socket.emit("ice-candidate", {
-          appointmentId,
-          candidate: event.candidate,
-        });
-      }
-    };
+  // ===== DEBUG LOGS =====
 
-    pc.ontrack = (event) => {
-      if (remoteVideoRef.current) {
-        remoteVideoRef.current.srcObject = event.streams[0];
-      }
-    };
-
-    peerConnection.current = pc;
-    return pc;
+  pc.onconnectionstatechange = () => {
+    console.log("Connection:", pc.connectionState);
   };
+
+  pc.oniceconnectionstatechange = () => {
+    console.log("ICE:", pc.iceConnectionState);
+  };
+
+  pc.onicegatheringstatechange = () => {
+    console.log("ICE Gathering:", pc.iceGatheringState);
+  };
+
+  // ===== ICE CANDIDATE =====
+
+  pc.onicecandidate = (event) => {
+    if (event.candidate) {
+      socket.emit("ice-candidate", {
+        appointmentId,
+        candidate: event.candidate,
+      });
+    }
+  };
+
+  // ===== REMOTE STREAM =====
+
+  pc.ontrack = (event) => {
+    console.log("Remote stream received");
+
+    if (remoteVideoRef.current) {
+      remoteVideoRef.current.srcObject = event.streams[0];
+    }
+  };
+
+  peerConnection.current = pc;
+  return pc;
+};
 
   const endCall = (notify = true) => {
     if (notify) {
